@@ -2,6 +2,19 @@
     color: #636c72!important;
 }
 
+.btn {
+  color: #fff;
+  background-color: #7952b3;
+  border-color: #7952b3;
+}
+
+.btn:active, .btn:focus, .btn:hover {
+  font-weight: 500;
+  color: #7952b3;
+  background-color: #FFF;
+  border-color: #7952b3;
+}
+
 .jumbotron {
   background-image: -webkit-linear-gradient(315deg,#271b38,#563d7c,#7952b3);
   background-image: -o-linear-gradient(315deg,#271b38,#563d7c,#7952b3);
@@ -30,6 +43,10 @@ footer {
 
 .bd-footer-links li {
     display: inline-block;
+}
+
+.bd-footer-links li+li {
+    margin-left: 1rem;
 }
 
 .bd-footer a {
