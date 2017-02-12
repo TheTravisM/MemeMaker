@@ -7,111 +7,67 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Creating A Canvas</title>
-
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-      #image-container {
-        display: flex;
-      }
-    </style>
   </head>
   <body>
-
-    <div>
-      <input type="file" id="file" />
-    </div>
-    <div id="image-container">
-      <canvas width="500" height="500"></canvas>
-      <div>
-        <span>Top Line:</span><br/>
-        <input id="topLineText" type="text"><br/>
-        <span>Bottom Line:</span><br/>
-        <input id="bottomLineText" type="text"><br/>
-        <button id="saveBtn">Save</button>
+    <header class="jumbotron">
+      <div class="container">
+        <h1 class="display-3">Meme Maker</h1>
+        <p class="lead">This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
       </div>
-    </div>
-    <script>
-      function textChangeListener (evt) {
-        var id = evt.target.id;
-        var text = evt.target.value;
+    </header>
 
-        if (id == "topLineText") {
-          window.topLineText = text;
-        } else {
-          window.bottomLineText = text;
-        }
-        redrawMeme(window.imageSrc, window.topLineText, window.bottomLineText);
-      }
-
-      function redrawMeme(image, topLine, bottomLine) {
-        // Get Canvas2DContext
-        var canvas = document.querySelector('canvas');
-        var ctx = canvas.getContext("2d");
-        // -- [ Your code here ] -- //
-        if (image != null)
-          ctx.drawImage(image, 0, 0,canvas.width, canvas.height);
-        // - Font
-        ctx.font = "36px Impact";
-        ctx.textAlign = "center";
-        ctx.fillStyle = "#FFF";
-        ctx.strokeStyle = "#000";
-        ctx.lineWidth = 3;
-        // Top Line Text
-        if (topLine != null) {
-          ctx.fillText(topLine, canvas.width / 2, 40);
-          ctx.strokeText(topLine, canvas.width / 2, 40);
-        }
-        // Bottom Line Text
-        if (bottomLine != null) {
-          ctx.fillText(bottomLine, canvas.width / 2, canvas.height - 20);
-          ctx.strokeText(bottomLine, canvas.width / 2, canvas.height - 20);
-        }
-      }
-      // - Saving The File
-      function saveFile() {
-        window.open(document.querySelector('canvas').toDataURL());
-      }
-
-      function handleFileSelect(evt) {
-        var canvasWidth = 500;
-        var canvasHeight = 500;
-        var file = evt.target.files[0];
-
-        var reader = new FileReader();
-        reader.onload = function(fileObject) {
-          var data = fileObject.target.result;
-          // Create an image object
-          var image = new Image();
-          image.onload = function() {
-
-            window.imageSrc = this;
-            redrawMeme(window.imageSrc, null, null);
-          }
-          // Set image data to background image.
-          image.src = data;
-          console.log(fileObject.target.result);
-        };
-        reader.readAsDataURL(file)
-      }
-
-      window.topLineText = "";
-      window.bottomLineText = "";
-      var input1 = document.getElementById('topLineText');
-      var input2 = document.getElementById('bottomLineText');
-      input1.oninput = textChangeListener;
-      input2.oninput = textChangeListener;
-      document.getElementById('file').addEventListener('change', handleFileSelect, false);
-      document.querySelector('button').addEventListener('click', saveFile, false);
-    </script>
+    <main class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Your Meme Here!</h2>
+          <br>
+          <canvas id="meme-canvas" width="500" height="500"></canvas>
+       </div>
+        <aside class="col-md-6">
+          <h2>Sassy Content Here!</h2>
+          <br>
+          <form>
+            <div class="form-group">
+              <input type="file" class="form-control form-control-lg" id="file" aria-describedby="fileHelp">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control form-control-lg" id="topLineText" placeholder="Type Your Top Text Here">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control form-control-lg" id="bottomLineText" placeholder="Type Bottom Text Here">
+            </div>
+            <button id="saveBtn" class="btn btn-primary btn-lg" type="submit">Save</button>
+          </form>
+        </aside>
+        </div>
+      </main>
+   <!-- /container -->
+      <footer class="bd-footer text-muted">
+        <div class="container">
+          <ul class="bd-footer-links">
+            <li><a href="https://github.com/TheTravisM">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/travismikolay/">Twitter</a></li>
+            <li><a href="/examples/">Examples</a></li>
+            <li><a href="/about/history/">About</a></li>
+          </ul>
+          <p>Designed and built with all the love in the world by <a href="https://twitter.com/mdo" target="_blank">@mdo</a> and <a href="https://twitter.com/fat" target="_blank">@fat</a>. Maintained by the <a href="https://github.com/orgs/twbs/people">core team</a> with the help of <a href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</p>
+          <p>Currently v4.0.0-alpha.6. Code licensed <a rel="license" href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a>, docs <a rel="license" href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.</p>
+        </div>
+      </footer>
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/meme-maker.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
   </body>
 </html>
